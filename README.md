@@ -12,3 +12,5 @@ For now, the package works only with tasks that are formulated as follows:
 | b | c | d | a |
 
 Social choice class takes 2 dimensional list of rankings as in table and corresponding numbers of voters (first row of the table)
+
+For use cases see Example.md
