@@ -1,0 +1,22 @@
+[build-system]
+requires = ["hatchling", "numpy"]
+build-backend = "hatchling.build"
+
+[project]
+name = "schoice"
+version = "0.0.1"
+authors = [
+  { name="Gorlevich Daniil", email="gorlevichd@gmail.com" },
+]
+description = "Python package for social choice problems"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/Gorlevichd/schoice"
+"Bug Tracker" = "https://github.com/Gorlevichd/schoice/issues"
