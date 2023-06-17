@@ -1,6 +1,5 @@
 [build-system]
-requires = ["hatchling", "numpy"]
-build-backend = "hatchling.build"
+requires = ["setuptools", "wheel", "numpy"]
 
 [project]
 name = "schoice"
