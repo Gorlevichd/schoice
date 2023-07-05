@@ -75,6 +75,7 @@ def add_matrix_1_expected():
     voters = [6, 3, 4, 4, 5]
     return RankingMatrix(ranking, voters)
 
+
 @pytest.fixture()
 def add_matrix_2():
     # Mutlidim
@@ -118,6 +119,7 @@ def add_matrix_3_expected():
         ["b", "a", "c"]
     ]
     return RankingMatrix(ranking, voters)
+
 
 def test_matrix_1(first_matrix_test):
     ranking, voters = first_matrix_test

@@ -53,18 +53,18 @@ def scoring_rule(rm_obj: RankingMatrix, candidate_list: Iterable = None, weights
     Assign descending score to each place in ranking, calculate sums
     """
     candidate_list, _ = candidate_list_filler(rm_obj, candidate_list)
-  
+
     if weights is None:
         # Running Borda
         weights = np.arange(0, len(candidate_list))[::-1]
     else:
-        weights = np.array(weights)
+        weights = np.array(weights)[::-1]
         # Run some checks
         if weights.shape[0] != len(candidate_list):
             raise ValueError(f"Shape of weights does not correspond to the shape \
                                 of candidate_list: {weights.shape[0]}, {len(candidate_list)}")
         if np.any(np.diff(weights) > 0):
-            raise ValueError("Weights array is not descending")
+            raise ValueError("Weights array is not increasing")
     weight_matrix = weights[rm_obj.ranking_matrix.astype(int)]
     scores = weight_matrix @ rm_obj.voters
     return candidate_list[scores == scores.max()], candidate_list, scores
@@ -75,7 +75,7 @@ def plurality_rule(rm_obj: RankingMatrix, candidate_list: Iterable = None, runof
     Calculates winners in plurality rule with runoff
     """
     still_running = candidate_list
-    for tour in range(2):
+    for tour in range(1, 3):
         still_running, votes = count_votes(rm_obj, still_running)
 
         # If one-round election
@@ -84,7 +84,7 @@ def plurality_rule(rm_obj: RankingMatrix, candidate_list: Iterable = None, runof
                     still_running[votes == votes.max()],
                     still_running,
                     votes)
-        
+      
         # Two round election
         # Strict majority
         # Votes is int anyway
@@ -94,27 +94,29 @@ def plurality_rule(rm_obj: RankingMatrix, candidate_list: Iterable = None, runof
                     still_running[votes == votes.max()],
                     still_running,
                     votes)
-        
+    
         if (votes == votes[0]).all():
             # If all equal
             return (tour,
                     still_running,
                     still_running,
                     votes)
-        
+    
         # If not returned, take first two candidates
-        max_votes = votes[np.argsort(np.unique(votes))[-2:]]
+        # Returns sorted
+        max_votes = np.unique(votes)[-2:][::-1]
+
         # Select candidates with votes corresponding to top 2
         # This should solve the problem with repeated max
-        still_running_1 = still_running[votes == max_votes[0]]
-        if still_running_1.shape[0] >= 2:
+        still_running_bool_1 = (votes == max_votes[0])
+        if still_running_bool_1.sum() >= 2:
             # We already filled our 2 places with top 1 candidates
-            still_running = still_running_1
+            still_running = still_running[still_running_bool_1]
             continue
         # If still_running_1 is less than 2 voters long
         # add voters with second max
-        still_running_2 = still_running[votes == max_votes[1]]
-        still_running = np.concat(still_running_1, still_running_2)
+        still_running_bool_2 = (votes == max_votes[1])
+        still_running = still_running[(still_running_bool_1 | still_running_bool_2)]
     warnings.warn("Failed to find a winner in two steps")
     return (tour, still_running, still_running, votes)
 
