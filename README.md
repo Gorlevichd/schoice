@@ -22,3 +22,9 @@ To install package run:
 `pip install git+https://github.com/Gorlevichd/schoice.git`
 
 Package requires `numpy`.
+
+For use cases please refer to the [https://github.com/Gorlevichd/schoice/blob/main/docs/Docs.md](Documentation)
+
+## Acknowledgements
+
+This project was majorly inspired by HSE Master's Microeconomics course taught by prof. Tatiana Mayskaya
