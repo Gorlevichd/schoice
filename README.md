@@ -1,4 +1,4 @@
-# schoice
+![image](https://github.com/Gorlevichd/schoice/assets/59909335/cac35d8a-8fd4-4b65-846b-b71ff1c21408)# schoice
 
 Small Python project for Social Choice calculations
 
@@ -23,7 +23,7 @@ To install package run:
 
 Package requires `numpy`.
 
-For use cases please refer to the [https://github.com/Gorlevichd/schoice/blob/main/docs/Docs.md](Documentation)
+For use cases please refer to the [Documentation](https://github.com/Gorlevichd/schoice/blob/main/docs/Docs.md)
 
 ## Acknowledgements
 
