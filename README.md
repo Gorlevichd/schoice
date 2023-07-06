@@ -1,4 +1,4 @@
-![image](https://github.com/Gorlevichd/schoice/assets/59909335/cac35d8a-8fd4-4b65-846b-b71ff1c21408)# schoice
+# schoice
 
 Small Python project for Social Choice calculations
 
